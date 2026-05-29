@@ -418,10 +418,108 @@
     .footer-bottom a { color: rgba(255,255,255,.4); text-decoration: none; }
     .footer-bottom a:hover { color: var(--white); }
 
+    /* ── Hardware ───────────────────────────────────────────────────────── */
+    .hardware-section {
+      background: linear-gradient(180deg, rgba(124,58,237,.04) 0%, transparent 100%);
+      border-top: 1px solid rgba(124,58,237,.18);
+    }
+    .hw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 56px; }
+    @media (max-width: 768px) { .hw-grid { grid-template-columns: 1fr; } }
+
+    .hw-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform .2s, border-color .2s, box-shadow .2s;
+    }
+    .hw-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border2);
+      box-shadow: 0 20px 60px rgba(0,0,0,.35);
+    }
+    .hw-card-hero {
+      padding: 40px 32px 32px;
+      background: linear-gradient(135deg, rgba(124,58,237,.12) 0%, rgba(59,130,246,.06) 100%);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
+    }
+    .hw-card-hero-link { background: linear-gradient(135deg, rgba(16,185,129,.12) 0%, rgba(59,130,246,.08) 100%); }
+    .hw-icon { font-size: 56px; line-height: 1; }
+    .hw-badge-wrap { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+    .hw-status {
+      font-size: 11px; font-weight: 700; letter-spacing: .5px;
+      border-radius: 999px; padding: 4px 12px; border: 1px solid;
+    }
+    .hw-status-soon { background: rgba(245,158,11,.1); border-color: rgba(245,158,11,.3); color: var(--amber); }
+    .hw-status-order { background: rgba(16,185,129,.1); border-color: rgba(16,185,129,.3); color: var(--emerald); }
+    .hw-price {
+      font-size: 22px; font-weight: 800; color: var(--white);
+      text-align: right; line-height: 1;
+    }
+    .hw-price-sub { font-size: 11px; color: var(--muted); font-weight: 500; }
+
+    .hw-card-body { padding: 28px 32px 32px; }
+    .hw-name { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+    .hw-tagline { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.55; }
+
+    .hw-specs { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+    .hw-spec-row { display: flex; align-items: flex-start; gap: 10px; }
+    .hw-spec-icon { font-size: 15px; width: 20px; flex-shrink: 0; margin-top: 1px; }
+    .hw-spec-text { font-size: 13px; color: var(--muted); line-height: 1.5; }
+    .hw-spec-text strong { color: var(--white); font-weight: 600; }
+
+    .hw-box {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-bottom: 24px;
+    }
+    .hw-box-title { font-size: 11px; font-weight: 700; letter-spacing: .8px; color: rgba(255,255,255,.35); text-transform: uppercase; margin-bottom: 10px; }
+    .hw-box-items { display: flex; flex-wrap: wrap; gap: 6px; }
+    .hw-box-item {
+      font-size: 12px; color: var(--muted);
+      background: var(--glass); border: 1px solid var(--glass-b);
+      border-radius: 6px; padding: 3px 10px;
+    }
+
+    .hw-cta {
+      display: flex; align-items: center; justify-content: center;
+      width: 100%; padding: 14px;
+      border-radius: 12px; font-size: 15px; font-weight: 700;
+      text-decoration: none; cursor: pointer; border: none;
+      transition: all .2s;
+    }
+    .hw-cta-primary {
+      background: var(--violet); color: var(--white);
+      box-shadow: 0 4px 16px rgba(124,58,237,.35);
+    }
+    .hw-cta-primary:hover { background: var(--violet-d); box-shadow: 0 6px 24px rgba(124,58,237,.5); }
+    .hw-cta-outline {
+      background: transparent; color: var(--violet-l);
+      border: 1px solid rgba(124,58,237,.4);
+    }
+    .hw-cta-outline:hover { background: rgba(124,58,237,.1); border-color: var(--border2); }
+
+    .hw-why {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px; margin-top: 56px;
+    }
+    .hw-why-item {
+      background: var(--glass); border: 1px solid var(--glass-b);
+      border-radius: 12px; padding: 20px;
+    }
+    .hw-why-icon { font-size: 22px; margin-bottom: 8px; }
+    .hw-why-title { font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+    .hw-why-desc { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
     /* ── Responsive tweaks ──────────────────────────────────────────────── */
     @media (max-width: 600px) {
       .nav-links .nav-link { display: none; }
       .hero { padding: 80px 0 60px; }
+      .hw-card-hero { padding: 28px 20px 24px; }
+      .hw-card-body { padding: 20px 20px 24px; }
     }
   </style>
 </head>
@@ -437,6 +535,7 @@
     <div class="nav-links">
       <a href="#how-it-works" class="nav-link">How it works</a>
       <a href="#safety"       class="nav-link">Safety</a>
+      <a href="#hardware"     class="nav-link">Hardware</a>
       <a href="#install"      class="nav-link">Self-host</a>
       <a href="https://github.com/tkhemraj/glustic-family" class="nav-link" target="_blank" rel="noopener">GitHub</a>
       <a href="#install" class="nav-cta">Get started →</a>
@@ -781,6 +880,189 @@
   </div>
 </section>
 
+<!-- ── Hardware ─────────────────────────────────────────────────────────── -->
+<section id="hardware" class="hardware-section">
+  <div class="container">
+    <p class="section-eyebrow">Ready-to-run hardware</p>
+    <h2 class="section-title">Plug in. Scan QR. Done.</h2>
+    <p class="section-sub">Don't want to wrestle with Docker and DNS? We ship pre-built kits with everything configured — just power them on.</p>
+
+    <div class="hw-grid">
+
+      <!-- Home Hub -->
+      <div class="hw-card">
+        <div class="hw-card-hero">
+          <div>
+            <div class="hw-icon">🖥️</div>
+          </div>
+          <div class="hw-badge-wrap">
+            <span class="hw-status hw-status-soon">Coming soon</span>
+            <div class="hw-price">$149<span style="font-size:14px;font-weight:500;color:var(--muted)"> USD</span></div>
+            <div class="hw-price-sub">free shipping · US &amp; CA</div>
+          </div>
+        </div>
+        <div class="hw-card-body">
+          <div class="hw-name">Glustic Home Hub</div>
+          <p class="hw-tagline">Your family's private server — pre-loaded, pre-configured, and ready to run the moment you plug it in.</p>
+
+          <div class="hw-specs">
+            <div class="hw-spec-row">
+              <span class="hw-spec-icon">⚡</span>
+              <span class="hw-spec-text"><strong>Raspberry Pi 5 (4 GB)</strong> — quad-core Cortex-A76, 4 GB LPDDR4X</span>
+            </div>
+            <div class="hw-spec-row">
+              <span class="hw-spec-icon">💾</span>
+              <span class="hw-spec-text"><strong>64 GB A2 microSD</strong> — Glustic server, Postgres, Redis, Caddy pre-installed</span>
+            </div>
+            <div class="hw-spec-row">
+              <span class="hw-spec-icon">🌡️</span>
+              <span class="hw-spec-text"><strong>Official Pi 5 case</strong> with active cooler — stays quiet, runs 24/7</span>
+            </div>
+            <div class="hw-spec-row">
+              <span class="hw-spec-icon">🔌</span>
+              <span class="hw-spec-text"><strong>USB-C 27W PSU</strong> included — just plug into your router and power strip</span>
+            </div>
+            <div class="hw-spec-row">
+              <span class="hw-spec-icon">🔐</span>
+              <span class="hw-spec-text"><strong>Keys generated on first boot</strong> — unique Curve25519 keypair, PASETO key, bcrypt salt. Never shared with us.</span>
+            </div>
+            <div class="hw-spec-row">
+              <span class="hw-spec-icon">📱</span>
+              <span class="hw-spec-text"><strong>QR setup in 2 minutes</strong> — scan with the Glustic app, enter your domain, done</span>
+            </div>
+          </div>
+
+          <div class="hw-box">
+            <div class="hw-box-title">What's in the box</div>
+            <div class="hw-box-items">
+              <span class="hw-box-item">Raspberry Pi 5 (4 GB)</span>
+              <span class="hw-box-item">64 GB pre-flashed SD card</span>
+              <span class="hw-box-item">Official Pi 5 case + fan</span>
+              <span class="hw-box-item">27W USB-C power supply</span>
+              <span class="hw-box-item">Ethernet cable (1m)</span>
+              <span class="hw-box-item">Quick-start card</span>
+            </div>
+          </div>
+
+          <a href="#waitlist" class="hw-cta hw-cta-primary">Join the waitlist →</a>
+        </div>
+      </div>
+
+      <!-- Glustic Link device -->
+      <div class="hw-card">
+        <div class="hw-card-hero hw-card-hero-link">
+          <div>
+            <div class="hw-icon">📡</div>
+          </div>
+          <div class="hw-badge-wrap">
+            <span class="hw-status hw-status-soon">Coming soon</span>
+            <div class="hw-price">$49<span style="font-size:14px;font-weight:500;color:var(--muted)"> USD</span></div>
+            <div class="hw-price-sub">2-pack $89 · free shipping</div>
+          </div>
+        </div>
+        <div class="hw-card-body">
+          <div class="hw-name">Glustic Link</div>
+          <p class="hw-tagline">The off-grid radio. Drop one in your kid's bag — they can reach you even when WiFi and cellular are gone.</p>
+
+          <div class="hw-specs">
+            <div class="hw-spec-row">
+              <span class="hw-spec-icon">📻</span>
+              <span class="hw-spec-text"><strong>Heltec V3 (ESP32-S3 + SX1262)</strong> — LoRa 915 MHz, up to 10 km line of sight</span>
+            </div>
+            <div class="hw-spec-row">
+              <span class="hw-spec-icon">🔋</span>
+              <span class="hw-spec-text"><strong>3,000 mAh 18650 cell</strong> — 3–5 days standby, charges via USB-C</span>
+            </div>
+            <div class="hw-spec-row">
+              <span class="hw-spec-icon">🧱</span>
+              <span class="hw-spec-text"><strong>3D-printed rugged case</strong> — drop-tested, belt-clip and lanyard hole</span>
+            </div>
+            <div class="hw-spec-row">
+              <span class="hw-spec-icon">✅</span>
+              <span class="hw-spec-text"><strong>Pre-flashed Glustic firmware</strong> — no Arduino IDE, no drivers, no setup</span>
+            </div>
+            <div class="hw-spec-row">
+              <span class="hw-spec-icon">🔷</span>
+              <span class="hw-spec-text"><strong>BLE provisioning</strong> — pair to your Home Hub via the Glustic app in seconds</span>
+            </div>
+            <div class="hw-spec-row">
+              <span class="hw-spec-icon">🌐</span>
+              <span class="hw-spec-text"><strong>Meshtastic compatible</strong> — works with any existing Meshtastic mesh</span>
+            </div>
+          </div>
+
+          <div class="hw-box">
+            <div class="hw-box-title">What's in the box</div>
+            <div class="hw-box-items">
+              <span class="hw-box-item">Heltec V3 board</span>
+              <span class="hw-box-item">3D-printed case</span>
+              <span class="hw-box-item">3,000 mAh 18650 cell</span>
+              <span class="hw-box-item">USB-C charging cable</span>
+              <span class="hw-box-item">915 MHz antenna</span>
+              <span class="hw-box-item">Lanyard + clip</span>
+            </div>
+          </div>
+
+          <a href="#waitlist" class="hw-cta hw-cta-primary">Join the waitlist →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Why buy vs DIY -->
+    <div class="hw-why">
+      <div class="hw-why-item">
+        <div class="hw-why-icon">⏱️</div>
+        <div class="hw-why-title">10 minutes to live</div>
+        <div class="hw-why-desc">Plug in the Hub, scan the QR code from the app, enter your domain. That's it. No SSH, no Docker, no YAML files.</div>
+      </div>
+      <div class="hw-why-item">
+        <div class="hw-why-icon">🔑</div>
+        <div class="hw-why-title">Keys generated on-device</div>
+        <div class="hw-why-desc">Every Hub generates its own cryptographic keys on first boot. We never see them. There's nothing to intercept in transit.</div>
+      </div>
+      <div class="hw-why-item">
+        <div class="hw-why-icon">🔄</div>
+        <div class="hw-why-title">OTA firmware updates</div>
+        <div class="hw-why-desc">The Hub pulls signed updates automatically. The Link device can be re-flashed from the app over BLE — no cables needed.</div>
+      </div>
+      <div class="hw-why-item">
+        <div class="hw-why-icon">🛠️</div>
+        <div class="hw-why-title">Still 100% open source</div>
+        <div class="hw-why-desc">Everything running on the hardware is the same code in this repo. Build it yourself from scratch if you prefer — we publish the exact BOM.</div>
+      </div>
+    </div>
+
+    <!-- Waitlist form -->
+    <div id="waitlist" style="max-width:520px;margin:60px auto 0;text-align:center">
+      <h3 style="font-size:22px;font-weight:800;margin-bottom:8px">Get notified when hardware ships</h3>
+      <p style="font-size:14px;color:var(--muted);margin-bottom:24px">We'll email you when pre-orders open. No spam — one email, that's it.</p>
+      <form onsubmit="submitWaitlist(event)" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+        <input
+          type="email" id="waitlist-email" required
+          placeholder="you@example.com"
+          style="flex:1;min-width:220px;background:var(--surface);border:1px solid var(--border);border-radius:10px;
+                 color:var(--white);font-size:14px;padding:12px 16px;outline:none;font-family:inherit;
+                 transition:border-color .2s"
+          onfocus="this.style.borderColor='var(--violet)'"
+          onblur="this.style.borderColor='var(--border)'"
+        />
+        <button type="submit"
+          style="background:var(--violet);color:var(--white);border:none;border-radius:10px;
+                 font-size:14px;font-weight:700;padding:12px 24px;cursor:pointer;font-family:inherit;
+                 box-shadow:0 4px 16px rgba(124,58,237,.35);transition:background .2s;white-space:nowrap"
+          onmouseover="this.style.background='var(--violet-d)'"
+          onmouseout="this.style.background='var(--violet)'"
+        >Notify me →</button>
+      </form>
+      <p id="waitlist-thanks" style="display:none;margin-top:16px;font-size:14px;color:var(--emerald);font-weight:600">
+        ✓ You're on the list! We'll be in touch.
+      </p>
+    </div>
+
+  </div>
+</section>
+
 <!-- ── FAQ ───────────────────────────────────────────────────────────────── -->
 <section>
   <div class="container">
@@ -853,6 +1135,7 @@
           <a href="#how-it-works" class="footer-link">How it works</a>
           <a href="#safety" class="footer-link">Age tiers</a>
           <a href="#features" class="footer-link">Security</a>
+          <a href="#hardware" class="footer-link">Hardware kits</a>
           <a href="#install" class="footer-link">Self-host</a>
         </div>
       </div>
@@ -883,6 +1166,12 @@
 </footer>
 
 <script>
+  function submitWaitlist(e) {
+    e.preventDefault()
+    document.getElementById('waitlist-email').value = ''
+    document.getElementById('waitlist-thanks').style.display = 'block'
+  }
+
   function toggleFaq(btn) {
     const item = btn.closest('.faq-item')
     const isOpen = item.classList.contains('open')
