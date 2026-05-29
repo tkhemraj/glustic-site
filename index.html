@@ -1340,7 +1340,25 @@
           Is this production-ready?
           <span class="faq-chevron">›</span>
         </button>
-        <div class="faq-a">The server, database schema, and cryptography are production-grade. Before deploying to real families, you should replace the placeholder content filter term lists with a maintained classifier (Detoxify self-hosted, or Azure Content Moderator), integrate PhotoDNA or the NCMEC API for CSAM hash matching, and add the Perspective API key for ML-backed toxicity scoring. The deployment checklist is documented in the filter package.</div>
+        <div class="faq-a">
+          <p style="margin-bottom:12px">The server, database schema, and cryptography are production-grade. The content filter interface is stable — swapping in a real classifier does <em>not</em> require changes to the messaging service. Three things to wire in before going live:</p>
+
+          <p style="font-weight:700;color:var(--white);margin-bottom:6px">1. Toxicity / profanity classifier</p>
+          <ul style="padding-left:18px;display:flex;flex-direction:column;gap:5px;margin-bottom:14px">
+            <li><a href="https://github.com/unitaryai/detoxify" target="_blank" rel="noopener" style="color:var(--violet-l)">Detoxify</a> — self-hosted Python model, privacy-preserving, no data leaves your server. <a href="https://github.com/tkhemraj/glustic-family/blob/main/docs/SAFETY_MODEL.md" target="_blank" rel="noopener" style="color:var(--violet-l)">Setup guide in SAFETY_MODEL.md →</a></li>
+            <li><a href="https://azure.microsoft.com/en-us/products/ai-services/content-safety" target="_blank" rel="noopener" style="color:var(--violet-l)">Azure AI Content Safety</a> (formerly Content Moderator) — managed API, SOC 2 compliant, EU data residency available. Set <code style="background:var(--surface2);padding:1px 5px;border-radius:4px">AZURE_CONTENT_SAFETY_KEY</code> + <code style="background:var(--surface2);padding:1px 5px;border-radius:4px">AZURE_CONTENT_SAFETY_ENDPOINT</code> in your <code style="background:var(--surface2);padding:1px 5px;border-radius:4px">.env</code>.</li>
+            <li><a href="https://perspectiveapi.com" target="_blank" rel="noopener" style="color:var(--violet-l)">Perspective API</a> (Google Jigsaw) — free tier, excellent for comment-style text. Set <code style="background:var(--surface2);padding:1px 5px;border-radius:4px">PERSPECTIVE_API_KEY</code>. Hook already exists in <code style="background:var(--surface2);padding:1px 5px;border-radius:4px">internal/content/perspective.go</code>.</li>
+          </ul>
+
+          <p style="font-weight:700;color:var(--white);margin-bottom:6px">2. CSAM detection (required before any public deployment)</p>
+          <ul style="padding-left:18px;display:flex;flex-direction:column;gap:5px;margin-bottom:14px">
+            <li><a href="https://www.microsoft.com/en-us/photodna" target="_blank" rel="noopener" style="color:var(--violet-l)">Microsoft PhotoDNA</a> — hash-matching against a known CSAM database. Free for qualifying organizations. <a href="https://www.microsoft.com/en-us/photodna/onboarding" target="_blank" rel="noopener" style="color:var(--violet-l)">Apply for access →</a></li>
+            <li><a href="https://www.missingkids.org/gethelpnow/cybertipline" target="_blank" rel="noopener" style="color:var(--violet-l)">NCMEC CyberTipline API</a> — mandatory reporting in the US under 18 U.S.C. § 2258A. <a href="https://www.missingkids.org/content/dam/missingkids/pdfs/NCMEC-ESP-Reporting-Guide.pdf" target="_blank" rel="noopener" style="color:var(--violet-l)">ESP reporting guide (PDF) →</a></li>
+          </ul>
+
+          <p style="font-weight:700;color:var(--white);margin-bottom:6px">3. Term list review</p>
+          <p>The placeholder term lists in <code style="background:var(--surface2);padding:1px 5px;border-radius:4px">internal/content/filter.go</code> are illustrative only. Have a child-safety specialist review and expand them quarterly — or replace with one of the classifiers above.</p>
+        </div>
       </div>
     </div>
   </div>
